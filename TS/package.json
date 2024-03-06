@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r ts-node/register  --env-file=.env  src/index.ts"
+    "start": "node -r ts-node/register  --env-file=.env  src/invoke.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock": "^3.525.0"
+    "@aws-sdk/client-bedrock": "^3.525.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.525.0"
   }
 }
