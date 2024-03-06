@@ -39,8 +39,7 @@ async function main() {
 
         //build template:
         const template = ChatPromptTemplate.fromMessages([
-            ['system', 'Answer the users question based on the following context: {context}'],
-            ['user', '{input}']
+            ['human', 'Given this context: {context}, answer this question: {input}'],
         ]);
     
         const chain = template.pipe(model);
