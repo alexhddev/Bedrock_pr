@@ -18,5 +18,5 @@ def get_foundation_model(modelIdentifier):
     pp.pprint(model)
 
 
-# list_foundation_models()
+list_foundation_models()
 # get_foundation_model('anthropic.claude-v2')
