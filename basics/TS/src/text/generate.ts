@@ -18,6 +18,7 @@ async function invokeModel() {
 
     const response = await client.send(new InvokeModelCommand({
         body: JSON.stringify(payload),
+        
         modelId: 'amazon.titan-text-express-v1',
         contentType: 'application/json',
         accept: 'application/json',
