@@ -1,8 +1,8 @@
-from langchain.llms.bedrock import Bedrock
+from langchain_openai import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationChain
 
-model = Bedrock(model_id="meta.llama2-13b-chat-v1", region_name="us-west-2")
+model = ChatOpenAI(temperature=0, openai_api_key="xxx")
 model.model_kwargs = {"temperature": 0}
 
 memory = ConversationBufferMemory(llm=model, return_messages=False)
@@ -16,4 +16,5 @@ while True:
     if user_input.lower() == "exit":
         break
     response = chain.invoke(input=user_input)
-    print(response["response"])
+    last_message = response["response"][-1]  # Extract the last message
+    print(last_message)

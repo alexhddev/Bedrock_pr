@@ -15,7 +15,7 @@ async function main() {
     console.log('Chatbot is ready. Type a message to start the conversation.')
     process.stdin.addListener('data', async (input) => {
         const userInput = input.toString().trim();
-        const response = await chain.predict({
+        const response = await chain.invoke({
             input: userInput
         });
         console.log(response)
