@@ -1,17 +1,18 @@
 import boto3
 import json
 import pprint
-brt = boto3.client(service_name='bedrock-runtime', region_name="eu-central-1")
+client = boto3.client(service_name='bedrock-runtime', region_name="us-west-2")
 
-anthropic_config = json.dumps({
-    "prompt": "\n\nHuman: explain black holes to 8th graders\n\nAssistant:",
-    "max_tokens_to_sample": 300,
-    "temperature": 0.1,
+llama_model_id = "meta.llama2-13b-chat-v1"
+llama_config = json.dumps({
+    "prompt": "Tell me a story about a dragon",
+    "max_gen_len": 512,
+    "temperature": 0,
     "top_p": 0.9,
 })
 
 titan_config = json.dumps({
-            "inputText": "Tell me a story about a dragon.",
+            "inputText": "Tell me a story about a dragon",
             "textGenerationConfig": {
                 "maxTokenCount": 4096,
                 "stopSequences": [],
@@ -20,15 +21,18 @@ titan_config = json.dumps({
             }
         })
 
-modelId = 'amazon.titan-text-express-v1'
+titan_model_id = 'amazon.titan-text-express-v1'
 accept = 'application/json'
 contentType = 'application/json'
 
-response = brt.invoke_model(body=titan_config, modelId=modelId, accept=accept, contentType=contentType)
+response = client.invoke_model(body=llama_config, modelId=llama_model_id, accept=accept, contentType=contentType)
 
 response_body = json.loads(response.get('body').read())
 
 pp = pprint.PrettyPrinter(depth=4)
 
+
+
 # text
-pp.pprint(response_body.get('results'))
+pp.pprint(response_body.get('results')) # titan config
+pp.pprint(response_body["generation"]) # llama config

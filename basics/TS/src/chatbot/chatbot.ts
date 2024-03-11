@@ -9,6 +9,7 @@ const model = new Bedrock({
 
 })
 const memory = new BufferMemory();
+
 const chain = new ConversationChain({ llm: model, memory: memory });
 
 async function main() {
