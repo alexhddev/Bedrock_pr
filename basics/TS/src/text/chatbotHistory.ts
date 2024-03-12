@@ -2,8 +2,8 @@ import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedroc
 
 const client = new BedrockRuntimeClient({ region: 'us-west-2' })
 
-type HumanMessage = `Human: ${string}`;
-type AssistantMessage = `Assistant: ${string}`;
+type HumanMessage = `User: ${string}`;
+type AssistantMessage = `Bot: ${string}`;
 
 const history: Array<HumanMessage | AssistantMessage> = [];
 
@@ -27,16 +27,18 @@ async function main() {
     console.log('Chatbot is ready. Type a message to start the conversation.')
     process.stdin.addListener('data', async (input) => {
         const userInput = input.toString().trim();
-        history.push(`Human: ${userInput}`);
+        history.push(`User: ${userInput}`);
+        const configuration = getConfiguration();
         const response = await client.send(new InvokeModelCommand({
-            body: JSON.stringify(getConfiguration()),            
+            body: JSON.stringify(configuration),            
             modelId: 'amazon.titan-text-express-v1',
             contentType: 'application/json',
             accept: 'application/json',
         }))
         const responseBody = JSON.parse(new TextDecoder().decode(response.body));
-        const outputText = console.log(responseBody.results[0].outputText)
-        history.push(`Assistant: ${outputText}`);
+        const outputText = responseBody.results[0].outputText
+        console.log(outputText);
+        history.push(outputText);
     })
 }
 
