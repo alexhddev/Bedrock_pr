@@ -6,13 +6,12 @@ const client = new BedrockRuntimeClient({ region: 'us-west-2' })
 const stabilityImageConfig = {
     text_prompts: [
         {
-            text: 'a photo of a dragon',
+            text: 'a cute an a mat',
         }
     ],
     height: 512,
     width: 512,
     cfg_scale: 10,
-    style_preset: '3d-model',
 }
 
 async function invokeModel() {
@@ -23,7 +22,7 @@ async function invokeModel() {
         contentType: 'application/json'
     }));
     const responseBody = JSON.parse(new TextDecoder().decode(response.body));
-    saveImage(responseBody.artifacts[0].base64, 'dragonDiffusion.png');
+    saveImage(responseBody.artifacts[0].base64, 'cat.png');
 }
 
 function saveImage(base64Data: string, fileName: string) {
