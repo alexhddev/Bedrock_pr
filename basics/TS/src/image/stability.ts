@@ -1,7 +1,5 @@
-// takes a lot of experimentation to get the right image
-
 import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime'
-import { writeFileSync, createReadStream } from 'fs'
+import { writeFileSync } from 'fs'
 
 const client = new BedrockRuntimeClient({ region: 'us-west-2' })
 
