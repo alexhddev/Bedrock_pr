@@ -12,13 +12,13 @@ const model = new Bedrock({
 })
 
 const myData = [
-    "My name is John.",
-    "My name is Bob.",
-    "My favorite food is pizza.",
-    "My favorite food is pasta.",
+    "The weather is nice today.",
+    "Last night's game ended in a tie.",
+    "Don likes to eat pizza.",
+    "Don likes to eat pasta.",
 ];
 
-const question = "What are my favorite foods?";
+const question = "What are Don's favorite foods?";
 
 async function main() {
     const vectorStore = new MemoryVectorStore(
@@ -27,7 +27,7 @@ async function main() {
         })
     );
     await vectorStore.addDocuments(myData.map(
-        content => new Document({pageContent: content})
+        content => new Document({ pageContent: content })
     ));
     const retriever = vectorStore.asRetriever({
         k: 2
@@ -35,21 +35,22 @@ async function main() {
     const results = await retriever.getRelevantDocuments(question);
     const resultDocs = results.map(
         result => result.pageContent
-    );
+    )
 
-        //build template:
-        const template = ChatPromptTemplate.fromMessages([
-            ['human', 'Given this context: {context}, answer this question: {input}'],
-        ]);
-    
-        const chain = template.pipe(model);
-    
-        const response = await chain.invoke({
-            input: question,
-            context: resultDocs
-        });
-    
-        console.log(response)  
+    //build template:
+    const template = ChatPromptTemplate.fromMessages([
+        ['system', 'Answer the users question based on the following context: {context}'],
+        ['user', '{input}']
+    ]);
+
+    const chain = template.pipe(model);
+
+    const response = await chain.invoke({
+        input: question,
+        context: resultDocs
+    });
+
+    console.log(response)
 }
 
 main();
