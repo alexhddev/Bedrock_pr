@@ -18,8 +18,9 @@ bedrock_embeddings = BedrockEmbeddings(
 
 question = "What themes does Gone with the Wind explore?"
 
+# data ingestion
 loader = PyPDFLoader("assets/books.pdf")
-splitter = RecursiveCharacterTextSplitter(separators=["\n"])
+splitter = RecursiveCharacterTextSplitter(separators=[". \n"], chunk_size=200)
 docs = loader.load()
 
 splitted_docs = splitter.split_documents(docs)
