@@ -4,16 +4,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.vectorstores import FAISS
 import boto3
 
-AWS_REGION = "us-west-2"
-
-bedrock = boto3.client(service_name="bedrock-runtime", region_name=AWS_REGION)
-
-model = Bedrock(model_id="amazon.titan-text-express-v1", client=bedrock)
-
-bedrock_embeddings = BedrockEmbeddings(
-    model_id="amazon.titan-embed-text-v1", client=bedrock
-)
-
 my_data = [
     "The weather is nice today.",
     "Last night's game ended in a tie.",
@@ -22,6 +12,20 @@ my_data = [
 ]
 
 question = "What does Don like to eat?"
+
+AWS_REGION = "us-west-2"
+
+bedrock = boto3.client(service_name="bedrock-runtime", region_name=AWS_REGION)
+
+model = Bedrock(model_id="amazon.titan-text-express-v1", client=bedrock)
+
+
+
+bedrock_embeddings = BedrockEmbeddings(
+    model_id="amazon.titan-embed-text-v1", client=bedrock
+)
+
+
 
 # create vector store
 vector_store = FAISS.from_texts(my_data, bedrock_embeddings)
