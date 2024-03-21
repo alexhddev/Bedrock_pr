@@ -1,5 +1,5 @@
 import { BedrockRuntimeClient, InvokeModelCommand } from "@aws-sdk/client-bedrock-runtime";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from "aws-lambda";
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
@@ -54,15 +54,17 @@ async function saveImageToS3(image: string) {
     const command = new PutObjectCommand({
         Bucket: S3_BUCKET,
         Key: imageName,
-        Body: imageFile,
-        ContentType: 'image/jpeg'
+        Body: imageFile
     });
-    const response = await s3Client.send(command);
+    await s3Client.send(command);
 
-    const signedUrl = await getSignedUrl(s3Client, command, { 
+    const getObjectCommand = new GetObjectCommand({
+        Bucket: S3_BUCKET,
+        Key: imageName
+    });
+
+    const signedUrl = await getSignedUrl(s3Client, getObjectCommand, {
         expiresIn: 3600,
-
-        
     });
     return signedUrl;
 }
