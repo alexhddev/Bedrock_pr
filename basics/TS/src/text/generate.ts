@@ -16,8 +16,8 @@ async function invokeModel() {
     const titanModelId = 'amazon.titan-text-express-v1';
 
     const llamaConfig = {
-        prompt: 'Tell me a story about a dragon.',
-        max_gen_len: 512,
+        prompt: 'Generate a story about a jazzman named Vincent and an actress named Mia.',
+        // max_gen_len: 512,
         temperature: 0,
         top_p: 0.9,
     }
