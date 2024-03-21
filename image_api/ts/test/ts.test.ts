@@ -1,17 +1,10 @@
-// import * as cdk from 'aws-cdk-lib';
-// import { Template } from 'aws-cdk-lib/assertions';
-// import * as Ts from '../lib/ts-stack';
+import { handler } from '../services/image'
 
-// example test. To run these tests, uncomment this file along with the
-// example resource in lib/ts-stack.ts
-test('SQS Queue Created', () => {
-//   const app = new cdk.App();
-//     // WHEN
-//   const stack = new Ts.TsStack(app, 'MyTestStack');
-//     // THEN
-//   const template = Template.fromStack(stack);
+async function testImage() {
+    const result = await handler({
+        body: JSON.stringify({ description: 'an image of a cat with an umbrella at night' })
+    } as any, {} as any)
+    console.log(result)
+}
 
-//   template.hasResourceProperties('AWS::SQS::Queue', {
-//     VisibilityTimeout: 300
-//   });
-});
+testImage()
