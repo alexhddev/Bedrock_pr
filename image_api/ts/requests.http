@@ -1,0 +1,7 @@
+GET https://5tzpqidwl9.execute-api.us-west-2.amazonaws.com/test/image
+content-Type: application/json
+
+{
+    "description": "a mistery movie poster"
+}
+###
