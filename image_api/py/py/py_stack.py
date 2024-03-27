@@ -3,7 +3,8 @@ from aws_cdk import (
     aws_apigateway,
     aws_lambda,
     aws_s3,
-    aws_iam
+    aws_iam,
+    Duration
 )
 from constructs import Construct
 
@@ -12,14 +13,19 @@ class PyImageApiStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        images_bucket = aws_s3.Bucket(self, 'ImagesPyBucket-1234')
+        images_bucket = aws_s3.Bucket(self, 'PY-ImagesPyBucket')
 
         images_lambda = aws_lambda.Function(
             self,
             "Py-ImageLambda",
             runtime=aws_lambda.Runtime.PYTHON_3_11,
             code=aws_lambda.Code.from_asset("services"),
-            handler="image.handler"
+            handler="image.handler",
+            environment={
+                "BUCKET_NAME": images_bucket.bucket_name
+            },
+            timeout=Duration.seconds(30)
+
         )
 
         images_bucket.grant_read_write(images_lambda)

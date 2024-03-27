@@ -1,0 +1,7 @@
+POST https://kj7tjsy7wf.execute-api.eu-west-1.amazonaws.com/prod/image
+content-Type: application/json
+
+{
+    "description": "a cute cats movie poster"
+}
+###

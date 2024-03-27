@@ -2,18 +2,19 @@ import boto3
 import json
 import base64
 from time import time
+import os
 
-AWS_REGION = "us-west-2"
-S3_BUCKET = "logo-bucket-1234"
+AWS_REGION_BEDROCK = "us-west-2"
+S3_BUCKET = os.environ.get("BUCKET_NAME")
 
-client = boto3.client(service_name="bedrock-runtime", region_name=AWS_REGION)
+client = boto3.client(service_name="bedrock-runtime", region_name=AWS_REGION_BEDROCK)
 s3_client = boto3.client('s3')
 
 
 def handler(event, context):
-    body = event["body"]
-    if body["description"]:
-        description = body["description"]
+    body = json.loads(event["body"])
+    description = body.get("description")
+    if description:
         titan_config = get_titan_config(description)
         response = client.invoke_model(
             body=titan_config, 

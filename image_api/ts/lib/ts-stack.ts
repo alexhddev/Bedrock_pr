@@ -11,7 +11,7 @@ export class TsImageApiStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
-        const imagesBucket = new Bucket(this, 'ImagesBucket-1234', {
+        const imagesBucket = new Bucket(this, 'TS-ImagesBucket', {
             
         })
 
