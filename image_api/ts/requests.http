@@ -1,4 +1,4 @@
-GET https://5tzpqidwl9.execute-api.us-west-2.amazonaws.com/test/image
+POST https://.execute-api.us-west-2.amazonaws.com/prod/empl
 content-Type: application/json
 
 {
