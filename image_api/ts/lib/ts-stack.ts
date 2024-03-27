@@ -15,7 +15,7 @@ export class TsImageApiStack extends cdk.Stack {
             
         })
 
-        const summaryLambda = new NodejsFunction(this, 'Ts-EmplLambda', {
+        const summaryLambda = new NodejsFunction(this, 'Ts-ImageLambda', {
             runtime: Runtime.NODEJS_20_X,
             handler: 'handler',
             entry: (join(__dirname, '..', 'services', 'image.ts')),
@@ -41,7 +41,7 @@ export class TsImageApiStack extends cdk.Stack {
                 allowMethods: Cors.ALL_METHODS
             }
         }
-        const emplResource = api.root.addResource('empl', optionsWithCors);
+        const emplResource = api.root.addResource('image', optionsWithCors);
 
         const emplLambdaIntegration = new LambdaIntegration(summaryLambda);
 
