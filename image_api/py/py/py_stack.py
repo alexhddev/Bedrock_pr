@@ -25,7 +25,6 @@ class PyImageApiStack(Stack):
                 "BUCKET_NAME": images_bucket.bucket_name
             },
             timeout=Duration.seconds(30)
-
         )
 
         images_bucket.grant_read_write(images_lambda)

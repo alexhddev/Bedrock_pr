@@ -1,4 +1,4 @@
-POST https://.execute-api.us-west-2.amazonaws.com/prod/empl
+POST https://d0my1fean9.execute-api.eu-west-1.amazonaws.com/prod/test
 content-Type: application/json
 
 {
