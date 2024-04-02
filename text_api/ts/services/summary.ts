@@ -16,6 +16,7 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
         if (parsedBody.text && numberOfPoints) {
             const text = parsedBody.text;
             const titanConfig = getTitanConfig(text, numberOfPoints);
+            console.log(titanConfig);
 
             const response = await client.send(new InvokeModelCommand({
                 modelId: 'amazon.titan-text-express-v1',
@@ -41,11 +42,12 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
 
 function getTitanConfig(text: string, points: string) {
 
-    const input = `Summarize in ${points} points the following text:
-        ${text}`;
+    const prompt = `Text: ${text}\\n
+        From the text above, summarize the story in ${points} points.\\n
+    `;
 
     return {
-        inputText: input,
+        inputText: prompt,
         textGenerationConfig: {
             maxTokenCount: 4096,
             stopSequences: [],
