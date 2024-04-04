@@ -21,6 +21,7 @@
     "typescript": "~5.4.3"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.543.0",
     "@aws-sdk/client-bedrock-runtime": "^3.540.0",
     "@types/aws-lambda": "^8.10.136",
     "aws-cdk-lib": "2.135.0",
