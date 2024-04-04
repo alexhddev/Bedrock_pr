@@ -19,7 +19,7 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
                     type: 'KNOWLEDGE_BASE',
                     knowledgeBaseConfiguration: {
                         knowledgeBaseId: 'XLBYQE9MF1',
-                        modelArn: 'arn:aws:bedrock:us-west-2::foundation-model/amazon.titan-text-express-v1'
+                        modelArn: 'arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-v2'
                     }
                 }
             })
