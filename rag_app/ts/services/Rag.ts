@@ -18,7 +18,7 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
                 retrieveAndGenerateConfiguration: {
                     type: 'KNOWLEDGE_BASE',
                     knowledgeBaseConfiguration: {
-                        knowledgeBaseId: 'XLBYQE9MF1',
+                        knowledgeBaseId: 'PSX4JIJMQN',
                         modelArn: 'arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-v2'
                     }
                 }
